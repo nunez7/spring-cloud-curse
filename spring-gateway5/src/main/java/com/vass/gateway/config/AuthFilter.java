@@ -36,7 +36,7 @@ public class AuthFilter implements GatewayFilter {
 		if (chunks.length != 2 || !chunks[0].equals("Bearer")) {
 			return onError(exchange, HttpStatus.BAD_REQUEST);
 		}
-		return webClient.build().post().uri("http://devs4j-auth/auth/validate?token=" + chunks[1]).retrieve()
+		return webClient.build().post().uri("http://nunez-oauth-service/auth/validate?token=" + chunks[1]).retrieve()
 				.bodyToMono(TokenDto.class).map(t -> {
 					return exchange;
 				}).flatMap(chain::filter);
